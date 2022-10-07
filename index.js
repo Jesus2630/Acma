@@ -1,15 +1,20 @@
 const express = require('express');
 const expressEjsLayouts = require('express-ejs-layouts');
-const ejslayout = require('express-ejs-layouts')
 const routes  = require('./routes');
+const bodyParser = require('body-parser') 
 require('dotenv').config();
 
 const db = require('./config/db');
+require('./models/Usuarios');
 db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error))
 
 
 //Creo aplicación
 const app = express()
+
+//BodyParse
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended : true})) 
 
 //Ejs
 app.use(expressEjsLayouts);

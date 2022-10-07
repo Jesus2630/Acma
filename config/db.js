@@ -10,5 +10,6 @@ module.exports = new Sequelize('Acma', 'postgres','4192738991',{
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    },
+    logging: false
 }) 
