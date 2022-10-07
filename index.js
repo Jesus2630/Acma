@@ -4,6 +4,9 @@ const ejslayout = require('express-ejs-layouts')
 const routes  = require('./routes');
 require('dotenv').config();
 
+const db = require('./config/db');
+db.sync().then(() => console.log('DB Conectada')).catch((error) => console.log(error))
+
 
 //Creo aplicación
 const app = express()
