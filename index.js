@@ -1,7 +1,10 @@
 const express = require('express');
 const expressEjsLayouts = require('express-ejs-layouts');
+const bodyParser = require('body-parser');
+const flash = require('connect-flash');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const routes  = require('./routes');
-const bodyParser = require('body-parser') 
 require('dotenv').config();
 
 const db = require('./config/db');
@@ -22,6 +25,20 @@ app.set('view engine', 'ejs');
 
 //Estaticos
 app.use(express.static('public'))
+
+//Habilito CookieParser
+app.use(cookieParser());
+
+//Creo la session
+app.use(session({
+    secret: process.env.SECRETO,   
+    key: process.env.KEY,
+    resave: false,
+    saveUninitialized: false
+}))
+
+//Agrego Mensajes Flash
+app.use(flash())
 
 //Middlewares
 app.use((req,res,next) =>{
